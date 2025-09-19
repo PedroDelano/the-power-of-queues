@@ -5,7 +5,16 @@ build-infrastructure:
 	uv run celery -A src.celery_app:app worker -Q cpu_bottleneck -c 1 -l INFO
 
 stop-infrastructure:
+	pkill -f fast_io
+	pkill -f cpu_bottleneck
 	docker stop redis
 	docker rm redis
-	docker ps -a | grep "celery" | awk '{print $1}' | xargs docker stop
-	docker ps -a | grep "celery" | awk '{print $1}' | xargs docker rm
+
+run-experiments:
+	docker pull redis
+	make build-infrastructure &
+	sleep 5
+	uv run src/method_1.py
+	uv run src/method_2.py
+	PYTHONPATH=$(pwd) uv run src/method_3.py
+	make stop-infrastructure
