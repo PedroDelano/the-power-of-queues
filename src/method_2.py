@@ -1,8 +1,10 @@
+import concurrent.futures
+
+from tqdm import tqdm
+
+from settings import settings
 from tasks import task_a, task_b, task_c
 from utils import timing
-from tqdm import tqdm
-import concurrent.futures
-from settings import settings
 
 
 def task_a_wrapper(_):

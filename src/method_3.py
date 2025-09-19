@@ -1,7 +1,9 @@
 import time
+
 from celery import chain
-from tasks_celery import task_a, task_b, task_c
+
 from settings import settings
+from tasks_celery import task_a, task_b, task_c
 
 
 def submit_n_jobs():

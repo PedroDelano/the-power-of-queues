@@ -1,5 +1,7 @@
 import random
+
 import requests
+
 from src.celery_app import app
 
 

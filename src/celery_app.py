@@ -1,4 +1,3 @@
-# src/celery_app.py
 from celery import Celery
 from kombu import Exchange, Queue
 
