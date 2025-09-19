@@ -16,5 +16,5 @@ run-experiments:
 	sleep 5
 	uv run src/method_1.py
 	uv run src/method_2.py
-	PYTHONPATH=$(pwd) uv run src/method_3.py
+	PYTHONPATH=$(CURDIR) uv run src/method_3.py
 	make stop-infrastructure
