@@ -2,10 +2,10 @@ from tqdm import tqdm
 
 from settings import settings
 from tasks import task_a, task_b, task_c
-from utils import timing
+import time
+import json
 
 
-@timing
 def method_1():
     response = []
     for _ in tqdm(range(settings.TOTAL_EPOCHS), desc="Method 1 Progress"):
@@ -16,4 +16,11 @@ def method_1():
 
 
 if __name__ == "__main__":
-    method_1()
+    start = time.perf_counter()
+    result = method_1() 
+    elapsed = time.perf_counter() - start
+
+    with open("method_1_time.json", "w") as f:
+        json.dump({"elapsed_seconds": elapsed}, f, indent=2)
+
+    print(f"Tempo total de execução salvo em method_1_time.json: {elapsed:.2f} s")

@@ -1,4 +1,5 @@
 import time
+import json
 
 from celery import chain
 
@@ -22,5 +23,7 @@ if __name__ == "__main__":
     start = time.perf_counter()
     async_results = submit_n_jobs()
     values = [r.get() for r in async_results]
-    end = time.perf_counter()
-    print(f"Finished {len(values)} chains in {end - start:.2f} seconds")
+    elapsed = time.perf_counter() - start
+    with open("method_3_time.json", "w") as f:
+        json.dump({"elapsed_seconds": elapsed}, f, indent=2)
+    print(f"Tempo total de execução salvo em method_3_time.json: {elapsed:.2f} s")
